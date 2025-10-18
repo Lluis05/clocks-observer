@@ -32,8 +32,7 @@ public class DigitalClock extends Clock {
     placeLabel.setText(worldPlace);
     placeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
     panel.add(placeLabel);
-
-    LocalDateTime now =  LocalDateTime.now();
+    LocalDateTime now = LocalDateTime.now();
     repaint(now);
   }
 

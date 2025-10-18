@@ -18,17 +18,7 @@ public class AnalogClock extends Clock {
     this.hoursOffsetTimeZone = hoursOffsetTimeZone;
     this.repaintPeriod = 1000;
     panel = new MyJPanel();
-    this.now = LocalDateTime.now();
-    repaint(now);
-    //run();
   }
-  /*
-  private void run() {
-    new Timer(repaintPeriod, e -> panel.repaint()).start();
-    // this is a java.swing.Timer object, not a java.util.Timer !
-    // repaint() calls paintComponent()
-  }
-  */
 
   protected void repaint(LocalDateTime now){
       this.now = now;
@@ -56,9 +46,9 @@ public class AnalogClock extends Clock {
       //LocalDateTime now = LocalDateTime.now().plus(hoursOffsetTimeZone, ChronoUnit.HOURS);
       // see https://www.geeksforgeeks.org/java/localdatetime-plus-method-in-java-with-examples/
 
-      int second = AnalogClock.this.now.getSecond();
-      int minute = AnalogClock.this.now.getMinute();
-      int hour = AnalogClock.this.now.getHour();
+      int second = now.getSecond();
+      int minute = now.getMinute();
+      int hour = now.getHour();
 
       drawHand(g2d, side / 2 - 10, second / 60.0, 0.5f, Color.RED);
       drawHand(g2d, side / 2 - 20, (minute + second/60.) / 60.0, 2.0f, Color.BLUE);
