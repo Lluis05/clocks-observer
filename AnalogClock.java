@@ -4,33 +4,35 @@ import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
+import java.util.Timer;
+
 
 // adapted from https://stackoverflow.com/questions/67553152/how-do-i-create-a-clock-using-timer
 public class AnalogClock extends Clock {
-  private final int repaintPeriod = 1000; // milliseconds
-  private int hoursOffsetTimeZone;
-  private String worldPlace;
+  //private final int repaintPeriod = 1000; // milliseconds
+  private LocalDateTime now;
 
 
   public AnalogClock(int hoursOffsetTimeZone, String worldPlace) {
     this.worldPlace = worldPlace;
     this.hoursOffsetTimeZone = hoursOffsetTimeZone;
+    this.repaintPeriod = 1000;
     panel = new MyJPanel();
-    run();
+    this.now = LocalDateTime.now();
+    repaint(now);
+    //run();
   }
-
-  public void show() {
-    JFrame frame = new JFrame();
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.add(panel);
-    frame.pack();
-    frame.setVisible(true);
-  }
-
+  /*
   private void run() {
     new Timer(repaintPeriod, e -> panel.repaint()).start();
     // this is a java.swing.Timer object, not a java.util.Timer !
     // repaint() calls paintComponent()
+  }
+  */
+
+  protected void repaint(LocalDateTime now){
+      this.now = now;
+      panel.repaint();
   }
 
   // we need to override paintComponent() of JPanel so we make a private class MyJPanel
@@ -51,12 +53,12 @@ public class AnalogClock extends Clock {
       int centerX = getWidth() / 2;
       int centerY = getHeight() / 2;
 
-      LocalDateTime now = LocalDateTime.now().plus(hoursOffsetTimeZone, ChronoUnit.HOURS);
+      //LocalDateTime now = LocalDateTime.now().plus(hoursOffsetTimeZone, ChronoUnit.HOURS);
       // see https://www.geeksforgeeks.org/java/localdatetime-plus-method-in-java-with-examples/
 
-      int second = now.getSecond();
-      int minute = now.getMinute();
-      int hour = now.getHour();
+      int second = AnalogClock.this.now.getSecond();
+      int minute = AnalogClock.this.now.getMinute();
+      int hour = AnalogClock.this.now.getHour();
 
       drawHand(g2d, side / 2 - 10, second / 60.0, 0.5f, Color.RED);
       drawHand(g2d, side / 2 - 20, (minute + second/60.) / 60.0, 2.0f, Color.BLUE);
@@ -93,5 +95,6 @@ public class AnalogClock extends Clock {
       g2d.drawString(worldPlace, (int) (radius * 1.2), (int) (radius * 2.0));
     }
   }
+
 
 }

@@ -10,15 +10,14 @@ import java.time.temporal.ChronoUnit;
 
 
 // adapted from https://stackoverflow.com/questions/67553152/how-do-i-create-a-clock-using-timer
-public class DigitalClock extends Clock implements Runnable {
-
+public class DigitalClock extends Clock {
   private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm:ss S"); // "H:mm:ss a"
-  private final int repaintPeriod = 100; // milliseconds
-  private int hoursOffsetTimeZone;
   private JLabel clockLabel;
+
 
   public DigitalClock(int hoursOffsetTimeZoneOffset, String worldPlace) {
     this.hoursOffsetTimeZone = hoursOffsetTimeZoneOffset;
+    this.repaintPeriod = 100;
 
     panel = new JPanel();
     panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -34,31 +33,12 @@ public class DigitalClock extends Clock implements Runnable {
     placeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
     panel.add(placeLabel);
 
-    updateClockLabel();
-    run();
+    LocalDateTime now =  LocalDateTime.now();
+    repaint(now);
   }
 
-  public void show() {
-    JFrame frame = new JFrame();
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.add(panel);
-    frame.pack();
-    frame.setVisible(true);
-  }
-
-  @Override
-  public void run() {
-    Timer timer = new Timer(repaintPeriod, new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent event) {
-        updateClockLabel();
-      }
-    });
-    timer.start();
-  }
-
-  public void updateClockLabel() {
-    LocalDateTime now = LocalDateTime.now().plus(hoursOffsetTimeZone, ChronoUnit.HOURS);
+  public void updateClockLabel(LocalDateTime now) {
+    //LocalDateTime now = LocalDateTime.now().plus(hoursOffsetTimeZone, ChronoUnit.HOURS);
     // see https://www.geeksforgeeks.org/java/localdatetime-plus-method-in-java-with-examples/
 
     String timeDisplay = now.format(formatter);
@@ -68,5 +48,9 @@ public class DigitalClock extends Clock implements Runnable {
     // it seems there is no need to explicitly call repaint()
 
   }
+
+    protected void repaint(LocalDateTime now){
+      updateClockLabel(now);
+    }
 
 }

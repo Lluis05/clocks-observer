@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Main {
   public static void main(String[] args) {
+    ClockTimer clockTimer = new ClockTimer(100);
     List<Clock> clocks = new ArrayList<>(List.of(
         new AnalogClock(0, "Cerdanyola, Catalonia"),
         new DigitalClock(-9, "Anchorage, Alaska"),
@@ -15,6 +16,7 @@ public class Main {
     ));
     // see https://www.geeksforgeeks.org/java/initialize-an-arraylist-in-java/
     for (Clock c : clocks) {
+      clockTimer.addObserver(c);
       c.show();
     }
   }
