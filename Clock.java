@@ -12,6 +12,11 @@ public abstract class Clock extends Widget{
   protected String worldPlace;
   protected LocalDateTime lastTimeRepaint;
 
+  Clock(int hoursOffsetTimeZone, int repaintPeriod){
+      this.hoursOffsetTimeZone = hoursOffsetTimeZone;
+      this.repaintPeriod = repaintPeriod;
+  }
+
   @Override
   public void update(Observable arg0, Object arg1){
       LocalDateTime now = (LocalDateTime) arg1;

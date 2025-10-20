@@ -16,8 +16,7 @@ public class DigitalClock extends Clock {
 
 
   public DigitalClock(int hoursOffsetTimeZoneOffset, String worldPlace) {
-    this.hoursOffsetTimeZone = hoursOffsetTimeZoneOffset;
-    this.repaintPeriod = 100;
+    super(hoursOffsetTimeZoneOffset, 100);
 
     panel = new JPanel();
     panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -32,24 +31,16 @@ public class DigitalClock extends Clock {
     placeLabel.setText(worldPlace);
     placeLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
     panel.add(placeLabel);
-    LocalDateTime now = LocalDateTime.now();
-    repaint(now);
+    repaint(LocalDateTime.now());
   }
 
-  public void updateClockLabel(LocalDateTime now) {
-    //LocalDateTime now = LocalDateTime.now().plus(hoursOffsetTimeZone, ChronoUnit.HOURS);
-    // see https://www.geeksforgeeks.org/java/localdatetime-plus-method-in-java-with-examples/
-
-    String timeDisplay = now.format(formatter);
-    // see https://www.baeldung.com/java-datetimeformatter
-    clockLabel.setText(timeDisplay);
-    // repaint();
-    // it seems there is no need to explicitly call repaint()
-
-  }
-
-    protected void repaint(LocalDateTime now){
+  @Override
+  protected void repaint(LocalDateTime now) {
       updateClockLabel(now);
-    }
+  }
 
+  private void updateClockLabel(LocalDateTime now) {
+    String timeDisplay = now.format(formatter);
+    clockLabel.setText(timeDisplay);
+  }
 }

@@ -9,14 +9,12 @@ import java.util.Timer;
 
 // adapted from https://stackoverflow.com/questions/67553152/how-do-i-create-a-clock-using-timer
 public class AnalogClock extends Clock {
-  //private final int repaintPeriod = 1000; // milliseconds
   private LocalDateTime now;
 
 
   public AnalogClock(int hoursOffsetTimeZone, String worldPlace) {
+    super(hoursOffsetTimeZone, 100);
     this.worldPlace = worldPlace;
-    this.hoursOffsetTimeZone = hoursOffsetTimeZone;
-    this.repaintPeriod = 1000;
     panel = new MyJPanel();
   }
 
