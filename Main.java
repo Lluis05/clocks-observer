@@ -14,7 +14,7 @@ public class Main {
         new DigitalClock(-7, "Sonora, Mexico"),
         new AnalogClock(-1, "Berlin, Germany"),
         new DigitalClock(-4, "Yerevan, Armenia"),
-        new CountDown(Duration.ofSeconds(60)),
+        new CountDown(Duration.ofSeconds(5)),
         new Stopwatch()
     ));
     // see https://www.geeksforgeeks.org/java/initialize-an-arraylist-in-java/

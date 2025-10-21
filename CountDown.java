@@ -3,14 +3,13 @@ package independent_clocks;
 import javax.swing.*;
 import java.awt.*;
 import java.time.Duration;
-import java.time.format.DateTimeFormatter;
 import java.util.Observable;
 
 public class CountDown extends Widget{
     private Duration countdown;
     private JLabel countdownLabel;
 
-    CountDown(Duration countdown) {
+    public CountDown(Duration countdown) {
         this.countdown = countdown;
 
         panel = new JPanel();
@@ -44,6 +43,7 @@ public class CountDown extends Widget{
             countdownLabel.setFont(new Font(Font.DIALOG, Font.PLAIN, 50));
             countdownLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
             countdownLabel.setText("FINALITZAT");
+            arg0.deleteObserver(this);
         }
     }
 

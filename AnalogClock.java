@@ -3,8 +3,6 @@ package independent_clocks;
 import javax.swing.*;
 import java.awt.*;
 import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
-import java.util.Timer;
 
 
 // adapted from https://stackoverflow.com/questions/67553152/how-do-i-create-a-clock-using-timer
