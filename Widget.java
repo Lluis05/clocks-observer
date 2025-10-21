@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.util.Observer;
 
 public abstract class Widget implements Observer {
-    protected int repaintPeriod;
     protected JPanel panel;
 
     public void show() {

@@ -3,14 +3,12 @@ package independent_clocks;
 import javax.swing.*;
 import java.awt.*;
 import java.time.Duration;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Observable;
 
 public class CountDown extends Widget{
     private Duration countdown;
     private JLabel countdownLabel;
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:mm:ss S"); // "H:mm:ss a"
 
     CountDown(Duration countdown) {
         this.countdown = countdown;
@@ -39,8 +37,13 @@ public class CountDown extends Widget{
     @Override
     public void update(Observable arg0, Object arg1){
         if(!countdown.equals(Duration.ZERO)) {
-            countdown = countdown.minusMillis(1000);
+            countdown = countdown.minusMillis(10);
             updateClockLabel();
+        }
+        else{
+            countdownLabel.setFont(new Font(Font.DIALOG, Font.PLAIN, 50));
+            countdownLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+            countdownLabel.setText("FINALITZAT");
         }
     }
 
