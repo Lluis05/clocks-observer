@@ -8,13 +8,13 @@ import java.time.Duration;
 import java.util.Observable;
 
 
-public class Stopwatch extends Widget{
+public class StopWatch extends Widget{
     private JLabel stopwatchLabel;
     private JButton startStopButton;
     private boolean toggle = false;
     private Duration stopwatch =  Duration.ZERO;
 
-    public Stopwatch(){
+    public StopWatch(){
         panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         panel.setBorder(BorderFactory.createEmptyBorder(5, 45, 5, 45));
