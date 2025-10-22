@@ -6,7 +6,7 @@ interface Observer {
   + update(o: Observable, arg: Object) : void
 }
 
-class Observable {
+abstract class Observable {
   + addObserver(o: Observer) : void
   + notifyObservers(arg: Object) : void
   + setChanged() : void
